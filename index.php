@@ -4,16 +4,30 @@
     $error = "";
     
     if (array_key_exists('city', $_GET)) {
-        
-    $weatherUrl = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$_GET['city']."&APPID=c991a799fb3183a5142203a6f90d0a75");
-    $weatherArray = json_decode($weatherUrl, true);
-    $weather = "The weather in ".$_GET['city']." is currently ".$weatherArray['weather'][0]['description'];
-    $tempinCelcius = $weatherArray['main']['temp']-273;
-    //$weather .= " and the temperature is ".$tempinCelcius."&deg;";
-    $weather .= "<br/>Current temperature is ".$tempinCelcius."&deg;";
+
+    //Calling the API server
+     $weatherUrl = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".urlencode($_GET['city'])."&APPID=c991a799fb3183a5142203a6f90d0a75");
+
+    $weatherArray = json_decode($weatherUrl, true); //The 2nd parameter is for making an associative array
+    //print_r($weatherArray); //Just viewing all the weather data for development purposes
+
+    if ($weatherArray['cod'] == 200) { //Making sure the API server recognizes the name of the city
+
+    $tempinCelcius = intval($weatherArray['main']['temp']-273); //Converting from Kelvin to Celcius
+
+    $weather = "The Temperature in ".$weatherArray['name'].", ".$weatherArray['sys']['country']." is currently ".$tempinCelcius."&deg;C"; 
+    $weather .= "<br/>With ".$weatherArray['weather'][0]['description'];
+      } 
+
+      else { //If not, warn the user about it!
+
+        $error = "No one knows where that is! Please type the name of a real city.";
+
+      }
 
     }
 
+    // Try Cairo, london, sao paolo, moscow, warsaw, paris, mexico city, new york, toronto, vancouver, kiev, oslo, canberra, kuala lumpur, abuja, helsinki, juneau, madrid, Buenos Aires, khartoum, tel aviv
 
 ?>
 
@@ -33,7 +47,9 @@
       <style type="text/css">
       
       html { 
-          background: url(images/bg3.jpg) no-repeat center center fixed; 
+         /* background: url(images/bg3.jpg) no-repeat center center fixed;*/
+            background:linear-gradient(rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45)),
+            url(images/bg3.jpg) no-repeat center center fixed;
           -webkit-background-size: cover;
           -moz-background-size: cover;
           -o-background-size: cover;
@@ -51,20 +67,18 @@
               
               text-align: center;
               margin-top: 100px;
-              width: 450px;
+              width: 480px;
               
           }
-          
-          input {
-              
-              margin: 20px 0;
-              
-          }
-          
+                    
           #weather {
               
-              margin-top:15px;
+              margin-top:60px;
               
+          }
+
+          label[for="city"] {
+            margin: 30px 0 5px;
           }
          
       </style>
@@ -74,14 +88,14 @@
     
       <div class="container">
       
-          <h1>What's The Weather?</h1>
+          <h1>Is the weather nice now?</h1>
           
           
           
           <form>
   <fieldset class="form-group">
-    <label for="city">Enter the name of a city.</label>
-    <input type="text" class="form-control" name="city" id="city" placeholder="Eg. London, Tokyo" value = "<?php 
+    <label for="city">Please enter the name of your city below.</label>
+    <input type="text" class="form-control" name="city" id="city" placeholder="Eg. London, Tokyo, san francisco" value = "<?php 
 																										   
        if (array_key_exists('city', $_GET)) {
        
@@ -92,7 +106,7 @@
        ?>">
   </fieldset>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">So, is it?</button>
 </form>
       
           <div id="weather"><?php 
