@@ -4,8 +4,9 @@
 	$weather = "";
 	$error = "";
 	$response = "";
+	$tempinCelcius = 0;
 
-	if (array_key_exists('city', $_GET)) {
+	if (array_key_exists('city', $_GET) && $_GET['city'] != "") {
 
 		//Calling the API server
 		$weatherUrl = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".urlencode($_GET['city'])."&APPID=c991a799fb3183a5142203a6f90d0a75");

@@ -12,9 +12,10 @@
 
     <title>Weather Scraper</title>
 
-    <!-- CSS -->
+    <!-- CSS & Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen|Saira+Condensed|Sanchez" rel="stylesheet">
       
   </head>
   <body>
@@ -50,9 +51,9 @@
 
             if ($weather) {
             //echo '<div class="alert alert-success" role="alert">'.$weather.'</div>';
-              echo '<h2>'.$weather.'</h2></br><h2 class="display-4">'.$response.'</h2>';
+              echo '<h2>'.$weather.'</h2></br><h3 class="display-4">'.$response.'</h3>';
             } else if ($error) {
-            echo '<h2>'.$error.'<h2>';
+            echo '<h2>'.$error.'</h2>';
 
             }?>
           </div>
