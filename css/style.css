@@ -9,18 +9,17 @@ html {
 }
 
 body {
-  background: none;
+  background: none; /*Because any bootstrap HTML text has a white BG which*/
   color: white;
 }
 
 .container {
   text-align: center;
-  margin-top: 100px;
-  /*width: 480px;*/
+  margin-top: 50px;
 }
 
 #weather {
-  margin-top:60px;
+  margin-top:30px;
 }
 
 label[for="city"] {

@@ -21,8 +21,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-3 col-sm-3">
-        </div>
+        <div class="col-md-3 col-sm-3"></div>
         <div class="col-md-6 col-sm-6">
           <h1>Is the weather nice now?</h1>
           <form>
@@ -39,16 +38,27 @@
 
             <button type="submit" class="btn btn-primary">So, is it?</button>
           </form>
-          <div id="weather"><?php 
-            if ($weather) {  
-            echo '<div class="alert alert-success" role="alert">'.$weather.'</div>';
+
+        </div>
+        <div class="col-md-3 col-sm-3"></div>
+      </div>
+      <div class="row">
+      <div class="col"></div>
+        <div class="col-12">
+          
+          <div id="weather"><?php
+
+            if ($weather) {
+            //echo '<div class="alert alert-success" role="alert">'.$weather.'</div>';
+              echo '<h2>'.$weather.'</h2></br><h2 class="display-4">'.$response.'</h2>';
             } else if ($error) {
-            echo '<div class="alert alert-danger" role="alert">'.$error.'</div>';
+            echo '<h2>'.$error.'<h2>';
+
             }?>
           </div>
+
         </div>
-        <div class="col-md-3 col-sm-3">
-        </div>
+        <div class="col"></div>
       </div>
     </div>
 
