@@ -8,7 +8,7 @@ function bringWeather() {
     "Nice my ass. It's freezing out there!", // Below 0
     "Kind of. It's a little chilly though!", // (0 - 9)
     "Fuck yeah, it is. Get out and dance!", // (10 - 19)
-    "Yes, it is. It's a little warm though!", // (20 - 29)
+    "Yes. It's a little warm though!", // (20 - 29)
     "Good luck getting BBQed out there!" // 30 or above]
   ];
 
@@ -37,7 +37,8 @@ function bringWeather() {
         break;
     }
 
-    resHTML += '<h2>'+tempinCelcius+'&deg;C</h2></br><h3 class="display-4">'+response+'</h3>';
+    resHTML += '<h2>'+tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country+'</h2>'+
+    '</br><h3 class="display-4">'+response+'</h3>';
     $('#weather').html(resHTML);
 
   })
