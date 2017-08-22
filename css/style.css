@@ -26,13 +26,8 @@ h1 {
   font-family: 'Sanchez', serif;
 }
 
-label[for="city"] {
+#cityField {
   margin: 30px 0 5px;
-  font-family: 'Saira Condensed', sans-serif;
-  font-size: 1.2rem
-}
-
-#city {
   font-family: 'Saira Condensed', sans-serif;
   font-size: 1.2rem
 }
@@ -45,6 +40,11 @@ button {
 h2 {
   font-family: 'Oxygen', sans-serif;
   letter-spacing: 2px;
+  display: none;
+}
+
+h4 {
+  display: none;
 }
 
 

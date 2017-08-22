@@ -2,7 +2,6 @@ function bringWeather() {
 
   var city = $('#cityField').val();
   var url = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID=c991a799fb3183a5142203a6f90d0a75';
-  var resHTML = '';
   var response = '';
   var responses = [
     "Nice my ass. It's freezing out there!", // Below 0
@@ -37,9 +36,15 @@ function bringWeather() {
         break;
     }
 
-    resHTML += '<h2>'+tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country+'</h2>'+
-    '</br><h3 class="display-4">'+response+'</h3>';
-    $('#weather').html(resHTML);
+    //Displaying the response in a callback function to make sure it displays after the fadeOut
+    $('#weather').find('h3').fadeOut(300, function() {
+      $(this).html(response).fadeIn(300)
+    });
+
+    $('#weather').find('h2')
+                  .html(tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country)
+                  .slideDown(1000);
+    $('h4').fadeIn(8000, "linear");
 
   })
   .fail(function() { //Error handler in case the user enters an unrecognized city
