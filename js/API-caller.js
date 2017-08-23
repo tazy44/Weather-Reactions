@@ -1,3 +1,5 @@
+var bg = 'bg3';
+
 function bringWeather() {
 
   var city = $('#cityField').val();
@@ -6,7 +8,7 @@ function bringWeather() {
   var responses = [
     "Nice my ass. It's freezing out there!", // Below 0
     "Kind of. It's a little chilly though!", // (0 - 9)
-    "Fuck yeah, it is. Get out and dance!", // (10 - 19)
+    "Hell yeah, it is. Get out and dance!", // (10 - 19)
     "Yes. It's a little warm though!", // (20 - 29)
     "Good luck getting BBQed out there!" // 30 or above]
   ];
@@ -72,6 +74,16 @@ function bringWeather() {
                   .html(tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country)
                   .slideDown(1000);
     $('h4').fadeIn(8000, "linear");
+
+
+      if (bg === 'bg3') { bg = 'bg2'; } else { bg = 'bg3'; }
+      $('html').css({
+        "background" : "url('images/"+bg+".jpg') no-repeat center center fixed",
+        "-webkit-background-size": "cover",
+        "-moz-background-size": "cover",
+        "-o-background-size": "cover",
+        "background-size": "cover"
+      });
 
 
   })
