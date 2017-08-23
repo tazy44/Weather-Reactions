@@ -1,16 +1,70 @@
-html { 
-  /* background: url(images/bg3.jpg) no-repeat center center fixed;*/
-  background:linear-gradient(rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45)),
-  url(../images/bg3.jpg) no-repeat center center fixed;
+html {
+  background:url('../images/bg3.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
 }
 
-body {
-  background: none; /*Because any bootstrap HTML text has a white BG which*/
+.reaction-default {
+  background: none; /*To remove any BG for the bootstrap elements*/
   color: white;
+  background-color: rgba(44, 62, 80, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  margin: 0px;
+}
+
+.reaction-zero {
+  color: #E1ECD6 !important;
+  background-color: rgba(22, 193, 200, 0.7);
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.reaction-one {
+  color: #5B3930 !important;
+  background-color: rgba(188, 216, 191, 0.7);
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.reaction-two {
+  color: #FF4E50 !important;
+  background-color: rgba(225, 245, 196, 0.7);
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.reaction-three {
+  color: #AB3E5B !important;
+  background-color: rgba(179, 204, 87, 0.7);
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.reaction-four {
+  color: #351330 !important;
+  background-color: rgba(204, 42, 65, 0.7);
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
 }
 
 .container {
