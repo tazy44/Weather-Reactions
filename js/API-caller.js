@@ -1,10 +1,10 @@
-var bg = 'bg3';
-
 function bringWeather() {
 
   var city = $('#cityField').val();
   var url = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID=c991a799fb3183a5142203a6f90d0a75';
   var response = ''; //The App's text reaction to user
+  var bg = ''; //A background generated from Unsplash
+  var img = new Image(); //An Image object to hold the bg and make sure it is fully loaded before it shows
   var responses = [
     "Nice my ass. It's freezing out there!", // Below 0
     "Kind of. It's a little chilly though!", // (0 - 9)
@@ -25,6 +25,8 @@ function bringWeather() {
     switch (true) {
       case tempinCelcius < 0:
         response = responses[0];
+        bg  = 'cold';
+        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
         $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
         $('body').addClass('reaction-zero', 1000)
@@ -35,6 +37,8 @@ function bringWeather() {
 
       case tempinCelcius < 10:
         response = responses[1];
+        bg  = 'chill';
+        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
         $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
         $('body').addClass('reaction-one', 1000)
@@ -44,6 +48,8 @@ function bringWeather() {
 
       case tempinCelcius < 20 :
         response = responses[2];
+        bg  = 'dance';
+        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
         $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
         $('body').addClass('reaction-two', 1000)
@@ -53,6 +59,8 @@ function bringWeather() {
 
       case tempinCelcius < 30:
         response = responses[3];
+        bg  = 'summer';
+        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
         $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
         $('body').addClass('reaction-three', 1000)
@@ -62,6 +70,8 @@ function bringWeather() {
       
       default:
         response = responses[4];
+        bg  = 'hot';
+        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
         $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
         $('body').addClass('reaction-four', 1000)
@@ -75,16 +85,21 @@ function bringWeather() {
                   .slideDown(1000);
     $('h4').fadeIn(8000, "linear");
 
-
-      if (bg === 'bg3') { bg = 'bg2'; } else { bg = 'bg3'; }
+    function showNewBg() {
       $('html').css({
-        "background" : "url('images/"+bg+".jpg') no-repeat center center fixed",
+        "background" : "url("+img.src+") no-repeat center center fixed",
         "-webkit-background-size": "cover",
         "-moz-background-size": "cover",
         "-o-background-size": "cover",
         "background-size": "cover"
       });
+    }
 
+    if (img.complete) {
+      showNewBg();
+    } else {
+    img.addEventListener('load', showNewBg);
+    } 
 
   })
   .fail(function() { //Error handler in case the user enters an unrecognized city
