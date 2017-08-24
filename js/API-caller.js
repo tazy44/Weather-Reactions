@@ -98,7 +98,11 @@ function bringWeather() {
     if (img.complete) {
       showNewBg();
     } else {
-    img.addEventListener('load', showNewBg);
+      img.addEventListener('load', showNewBg)
+      img.addEventListener('error', function() {
+          //Show the default bg saved on your server
+          //alert('error');
+      })
     } 
 
   })
