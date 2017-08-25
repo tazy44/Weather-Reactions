@@ -20,7 +20,7 @@ function bringWeather() {
     //The response displays in callback function to force the new response to
     //display after the old response has already faded out
 
-    function displayResults (bg, response, classToAdd, classesToRemove) {
+    function displayResults (bg, response, icon, classToAdd, classesToRemove) {
       img.src = 'https://source.unsplash.com/1600x900/?'+bg;
       $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
@@ -28,7 +28,7 @@ function bringWeather() {
         .removeClass(classesToRemove[0]+' '+classesToRemove[1]+' '+classesToRemove[2]+' '+classesToRemove[3]);
       });
       $('#weather').find('h2')
-                  .html(tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country)
+                  .html(tempinCelcius+'&deg;C <div class="'+icon+'"></div></br>'+res['name']+', '+res['sys'].country)
                   .slideDown(1000);
       $('h4').fadeIn(8000, "linear");
       if (img.complete) { //Making sure the new image is fully downloaded before displaying
@@ -56,41 +56,46 @@ function bringWeather() {
       case tempinCelcius < 0:
         response = responses[0];
         bg  = 'cold';
+        icon = 'icon-snow-flake';
         classToAdd = 'reaction-zero';
         classesToRemove = ['reaction-one', 'reaction-two', 'reaction-three', 'reaction-four'];
-        displayResults(bg, response, classToAdd, classesToRemove);
+        displayResults(bg, response, icon, classToAdd, classesToRemove);
         break;
 
       case tempinCelcius < 10:
         response = responses[1];
         bg  = 'chill';
+        icon = 'icon-hat';
         classToAdd = 'reaction-one';
         classesToRemove = ['reaction-zero', 'reaction-two', 'reaction-three', 'reaction-four'];
-        displayResults(bg, response, classToAdd, classesToRemove);
+        displayResults(bg, response, icon, classToAdd, classesToRemove);
         break;
 
       case tempinCelcius < 20 :
         response = responses[2];
         bg  = 'dance';
+        icon = 'icon-dance';
         classToAdd = 'reaction-two';
         classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-three', 'reaction-four'];
-        displayResults(bg, response, classToAdd, classesToRemove);
+        displayResults(bg, response, icon, classToAdd, classesToRemove);
         break;
 
       case tempinCelcius < 30:
         response = responses[3];
         bg  = 'summer';
+        icon = 'icon-sun-heart';
         classToAdd = 'reaction-three';
         classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-two', 'reaction-four'];
-        displayResults(bg, response, classToAdd, classesToRemove);
+        displayResults(bg, response, icon, classToAdd, classesToRemove);
         break;
       
       default:
         response = responses[4];
         bg  = 'hot';
+        icon = 'icon-bbq';
         classToAdd = 'reaction-four';
         classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-two', 'reaction-three'];
-        displayResults(bg, response, classToAdd, classesToRemove);
+        displayResults(bg, response, icon, classToAdd, classesToRemove);
         break;
     }
 

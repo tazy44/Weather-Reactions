@@ -149,6 +149,7 @@ h4 {
 .icon-bbq:before {
   content: "\63";
 }
+
 .icon-smile-heart:before {
   content: "\61";
 }
@@ -177,7 +178,12 @@ h4 {
   content: "\68";
 }
 
-
+.icon-bbq, .icon-snow-flake, .icon-sun-heart, .icon-hat, .icon-glasses, .icon-dance, .icon-ac {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  left: 7px;
+}
 
 
 
