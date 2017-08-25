@@ -19,71 +19,28 @@ function bringWeather() {
     //Based on the temperature range, a response displays and colors transition.
     //The response displays in callback function to force the new response to
     //display after the old response has already faded out
-    //The response & color transition code is repeated in each case because
-    //the classes that have to be removed from the body in each case is different
 
-    switch (true) {
-      case tempinCelcius < 0:
-        response = responses[0];
-        bg  = 'cold';
-        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
-        $('#weather').find('h3').fadeOut(300, function() {
+    function displayResults (bg, response, classToAdd, classesToRemove) {
+      img.src = 'https://source.unsplash.com/1600x900/?'+bg;
+      $('#weather').find('h3').fadeOut(300, function() {
         $(this).html(response).fadeIn(300);
-        $('body').addClass('reaction-zero', 1000)
-        .removeClass('reaction-three reaction-four reaction-two reaction-one');
-        });
-        break;
-        break;
-
-      case tempinCelcius < 10:
-        response = responses[1];
-        bg  = 'chill';
-        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
-        $('#weather').find('h3').fadeOut(300, function() {
-        $(this).html(response).fadeIn(300);
-        $('body').addClass('reaction-one', 1000)
-        .removeClass('reaction-three reaction-four reaction-zero reaction-two');
-        });
-        break;
-
-      case tempinCelcius < 20 :
-        response = responses[2];
-        bg  = 'dance';
-        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
-        $('#weather').find('h3').fadeOut(300, function() {
-        $(this).html(response).fadeIn(300);
-        $('body').addClass('reaction-two', 1000)
-        .removeClass('reaction-three reaction-four reaction-zero reaction-one');
-        });
-        break;
-
-      case tempinCelcius < 30:
-        response = responses[3];
-        bg  = 'summer';
-        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
-        $('#weather').find('h3').fadeOut(300, function() {
-        $(this).html(response).fadeIn(300);
-        $('body').addClass('reaction-three', 1000)
-        .removeClass('reaction-two reaction-four reaction-zero reaction-one');
-        });
-        break;
-      
-      default:
-        response = responses[4];
-        bg  = 'hot';
-        img.src = 'https://source.unsplash.com/1600x900/?'+bg;
-        $('#weather').find('h3').fadeOut(300, function() {
-        $(this).html(response).fadeIn(300);
-        $('body').addClass('reaction-four', 1000)
-        .removeClass('reaction-two reaction-three reaction-zero reaction-one');
-        });
-        break;
-    }
-
-    $('#weather').find('h2')
+        $('body').addClass(classToAdd, 1000)
+        .removeClass(classesToRemove[0]+' '+classesToRemove[1]+' '+classesToRemove[2]+' '+classesToRemove[3]);
+      });
+      $('#weather').find('h2')
                   .html(tempinCelcius+'&deg;C</br>'+res['name']+', '+res['sys'].country)
                   .slideDown(1000);
-    $('h4').fadeIn(8000, "linear");
+      $('h4').fadeIn(8000, "linear");
+      if (img.complete) { //Making sure the new image is fully downloaded before displaying
+        showNewBg();
+      } else {
+        img.addEventListener('load', showNewBg)
+        img.addEventListener('error', function() {
+            //Show the default bg saved on your server
+            //alert('error');
+        })
+      } 
+    }
 
     function showNewBg() {
       $('html').css({
@@ -95,15 +52,47 @@ function bringWeather() {
       });
     }
 
-    if (img.complete) {
-      showNewBg();
-    } else {
-      img.addEventListener('load', showNewBg)
-      img.addEventListener('error', function() {
-          //Show the default bg saved on your server
-          //alert('error');
-      })
-    } 
+    switch (true) {
+      case tempinCelcius < 0:
+        response = responses[0];
+        bg  = 'cold';
+        classToAdd = 'reaction-zero';
+        classesToRemove = ['reaction-one', 'reaction-two', 'reaction-three', 'reaction-four'];
+        displayResults(bg, response, classToAdd, classesToRemove);
+        break;
+
+      case tempinCelcius < 10:
+        response = responses[1];
+        bg  = 'chill';
+        classToAdd = 'reaction-one';
+        classesToRemove = ['reaction-zero', 'reaction-two', 'reaction-three', 'reaction-four'];
+        displayResults(bg, response, classToAdd, classesToRemove);
+        break;
+
+      case tempinCelcius < 20 :
+        response = responses[2];
+        bg  = 'dance';
+        classToAdd = 'reaction-two';
+        classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-three', 'reaction-four'];
+        displayResults(bg, response, classToAdd, classesToRemove);
+        break;
+
+      case tempinCelcius < 30:
+        response = responses[3];
+        bg  = 'summer';
+        classToAdd = 'reaction-three';
+        classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-two', 'reaction-four'];
+        displayResults(bg, response, classToAdd, classesToRemove);
+        break;
+      
+      default:
+        response = responses[4];
+        bg  = 'hot';
+        classToAdd = 'reaction-four';
+        classesToRemove = ['reaction-zero', 'reaction-one', 'reaction-two', 'reaction-three'];
+        displayResults(bg, response, classToAdd, classesToRemove);
+        break;
+    }
 
   })
   .fail(function() { //Error handler in case the user enters an unrecognized city
