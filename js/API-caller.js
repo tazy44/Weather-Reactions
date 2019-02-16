@@ -6,7 +6,7 @@ function bringWeather() {
   var bg = ''; //A background generated from Unsplash
   var img = new Image(); //An Image object to hold the bg and make sure it is fully loaded before it shows
   var responses = [
-    "Nice my ass. It's freezing out there!", // Below 0
+    "Not at all. It's freezing out there!", // Below 0
     "Kind of. It's a little chilly though!", // (0 - 9)
     "Hell yeah, it is. Get out and dance!", // (10 - 19)
     "Yes. It's a little warm though!", // (20 - 29)
